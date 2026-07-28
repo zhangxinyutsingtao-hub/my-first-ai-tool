@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>产品数据管理系统</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script defer src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+    <script defer src="app.js"></script>
+  </head>
+  <body>
+    <header class="hero">
+      <nav class="topbar">
+        <div class="brand">SKU Listing Studio</div>
+        <a href="#workspace" class="nav-link">开始整理</a>
+      </nav>
+      <section class="hero-grid">
+        <div>
+          <p class="eyebrow">面向跨境电商卖家的产品数据管理系统</p>
+          <h1>上传 Excel，一键整理 200+ 睡衣 SKU Listing</h1>
+          <p class="hero-copy">
+            自动补齐 Amazon 标题、AliExpress 标题、SEO 关键词与独立站英文描述，帮助团队把产品资料从表格变成可发布 Listing。
+          </p>
+          <div class="hero-actions">
+            <a class="primary-btn" href="#workspace">上传产品表</a>
+            <button class="ghost-btn" id="loadSampleBtn" type="button">加载示例数据</button>
+          </div>
+        </div>
+        <div class="process-card" aria-label="工作流程">
+          <span>上传 Excel / CSV</span>
+          <strong>↓</strong>
+          <span>自动整理产品信息</span>
+          <strong>↓</strong>
+          <span>生成英文标题 + SEO 关键词</span>
+          <strong>↓</strong>
+          <span>导出 Listing</span>
+        </div>
+      </section>
+    </header>
+
+    <main id="workspace" class="workspace">
+      <section class="panel upload-panel">
+        <div>
+          <p class="eyebrow">Step 1</p>
+          <h2>上传产品数据</h2>
+          <p>支持 .xlsx、.xls、.csv。建议列名包含：产品名称、面料、尺码、成本、图片、关键词。</p>
+        </div>
+        <label class="dropzone" for="fileInput">
+          <input id="fileInput" type="file" accept=".xlsx,.xls,.csv" />
+          <span class="upload-icon">⇧</span>
+          <strong>点击选择文件</strong>
+          <small>或使用示例数据快速体验</small>
+        </label>
+      </section>
+
+      <section class="metrics" aria-label="数据统计">
+        <article><span id="skuCount">0</span><small>SKU 数量</small></article>
+        <article><span id="avgCost">$0.00</span><small>平均成本</small></article>
+        <article><span id="keywordCount">0</span><small>SEO 关键词</small></article>
+        <article><span id="readyCount">0</span><small>已生成 Listing</small></article>
+      </section>
+
+      <section class="panel controls-panel">
+        <div>
+          <p class="eyebrow">Step 2</p>
+          <h2>批量生成与导出</h2>
+          <p>系统会根据产品名称、面料、尺码与原始关键词生成英文销售文案。</p>
+        </div>
+        <div class="button-row">
+          <button class="primary-btn" id="generateBtn" type="button">生成 Listing</button>
+          <button class="secondary-btn" id="exportBtn" type="button">导出 CSV</button>
+        </div>
+      </section>
+
+      <section class="table-section">
+        <div class="table-header">
+          <div>
+            <p class="eyebrow">Step 3</p>
+            <h2>Listing 预览</h2>
+          </div>
+          <input id="searchInput" type="search" placeholder="搜索产品 / 面料 / 关键词" />
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>图片</th>
+                <th>产品名称</th>
+                <th>面料</th>
+                <th>尺码</th>
+                <th>成本</th>
+                <th>Amazon 标题</th>
+                <th>SEO 关键词</th>
+                <th>独立站描述</th>
+              </tr>
+            </thead>
+            <tbody id="productTable">
+              <tr class="empty-row"><td colspan="8">请上传 Excel/CSV 或加载示例数据。</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
